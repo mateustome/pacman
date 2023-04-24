@@ -9,11 +9,16 @@ from GameRenderer import GameRenderer
 
 from Ghost import Ghost
 from GhostBehaviour import GhostBehaviour
+from Menu import menu_selection
 from MovableObject import MovableObject
 from ScoreType import ScoreType
 from Wall import Wall
 
-
+MAPS = {
+    "Iniciar jogo": "./maps/little_map.txt", 
+    "Mapa grande": "./maps/big_map.txt",
+    "Mapa mini": "./maps/mini_map.txt",
+}
 def translate_screen_to_maze(in_coords, in_size=32):
     return int(in_coords[0] / in_size), int(in_coords[1] / in_size)
 
@@ -69,6 +74,7 @@ class Hero(MovableObject):
     def handle_cookie_pickup(self):
         collision_rect = pygame.Rect(self.x, self.y, self._size, self._size)
         cookies = self._renderer.get_cookies()
+        print(len(cookies));
         powerups = self._renderer.get_powerups()
         game_objects = self._renderer.get_game_objects()
         cookie_to_remove = None
@@ -134,8 +140,8 @@ class Pathfinder:
 
 
 class PacmanGameController:
-    def __init__(self):
-        file = open('./maps/big_map.txt', 'r');
+    def __init__(self, map_url):
+        file = open(map_url, 'r');
         lines = []
         while line := file.readline():
             if not line:
@@ -186,10 +192,13 @@ class PacmanGameController:
 
             self.numpy_maze.append(binary_row)
 
-
-if __name__ == "__main__":
+def run(map_name):
+    if(map_name == None):
+        map_url = MAPS[menu_selection()];
+    else:
+        map_url = MAPS[map_name];
     unified_size = 32
-    pacman_game = PacmanGameController()
+    pacman_game = PacmanGameController(map_url)
     size = pacman_game.size
     game_renderer = GameRenderer(size[0] * unified_size, size[1] * unified_size)
 
@@ -217,5 +226,8 @@ if __name__ == "__main__":
     pacman = Hero(game_renderer, unified_size, unified_size, unified_size)
     game_renderer.add_hero(pacman)
     game_renderer.set_current_mode(GhostBehaviour.CHASE)
-    game_renderer.tick(120)
+    if(game_renderer.tick(120) == True):
+        run('Mapa grande');
     
+if __name__ == "__main__":
+    run(None);
