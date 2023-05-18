@@ -1,0 +1,23 @@
+Caso de teste 1: 
+    ao colidir o pacman na parede, não deve ser possível atravessá-la;
+
+Caso de teste 2: 
+    testar as teclas de setas para fazer o pacman se mexer;
+
+Caso de teste 3: 
+    pegar todos os pontos e passar para o próximo nível mudando de mapa;
+
+Caso de teste 4: 
+    pegar ponto e registrar pontuação;
+
+Caso de teste 5: 
+    perder vida quando bater no fantasma;
+
+Caso de teste 6: 
+    consegue ler um arquivo txt e pegar o mapa a partir dele;
+
+Caso de teste 7: 
+    o jogo deve rodar em linux, windows e mac;
+
+Caso de teste 8: 
+    perder quando não tiver mais vidas.

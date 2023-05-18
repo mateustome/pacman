@@ -51,7 +51,7 @@ class GameRenderer:
                 game_object.tick()
                 game_object.draw()
 
-            self.display_text(f"[Pontuação: {self._score}]  [Vidas: {self._lives}]")
+            self.display_text(f"Pontuação: {self._score}  Vidas: {self._lives}")
 
             if self._hero is None: 
                 self.display_text("Você perdeu!", (self._width / 2 - 256, self._height / 2 - 256), 100)

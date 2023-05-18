@@ -18,6 +18,7 @@ MAPS = {
     "Iniciar jogo": "./maps/little_map.txt", 
     "Mapa grande": "./maps/big_map.txt",
     "Mapa mini": "./maps/mini_map.txt",
+    "Mapa medio": "./maps/little_map.txt", 
 }
 def translate_screen_to_maze(in_coords, in_size=32):
     return int(in_coords[0] / in_size), int(in_coords[1] / in_size)
@@ -74,7 +75,6 @@ class Hero(MovableObject):
     def handle_cookie_pickup(self):
         collision_rect = pygame.Rect(self.x, self.y, self._size, self._size)
         cookies = self._renderer.get_cookies()
-        print(len(cookies));
         powerups = self._renderer.get_powerups()
         game_objects = self._renderer.get_game_objects()
         cookie_to_remove = None
@@ -227,7 +227,8 @@ def run(map_name):
     game_renderer.add_hero(pacman)
     game_renderer.set_current_mode(GhostBehaviour.CHASE)
     if(game_renderer.tick(120) == True):
-        run('Mapa grande');
+        #run('Mapa grande');
+        pygame.display.quit()
     
 if __name__ == "__main__":
     run(None);
